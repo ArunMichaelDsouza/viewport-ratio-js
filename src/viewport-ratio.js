@@ -45,4 +45,9 @@
 
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
 	console.log(window.viewportRatio.calculateTargetAreaPercent());
+
+	window.addEventListener('scroll', function(e) {
+	 	console.log(window.innerHeight);
+	 	console.log(window.innerWidth);
+	});
 })();
