@@ -6,17 +6,19 @@
 	'use strict';
 
 	// Constructor function to create viewport instance
-	function Viewport(width, height) {
+	function ViewportRatio(width, height) {
 		this.width = width;
 		this.height = height;
 		this.targetElements = [];
-		this.viewportArea = this.width + this.height;
+		this.getTotalViewportArea = function() {
+			return this.width + this.height;
+		};
 		this.targetElementsArea = 0;
 	}
 
 	// Function to get target element's area (in px)
-	Viewport.prototype.getTargetElementsArea = function(elements) {
-		var elementList = document.querySelectorAll(elements);
+	ViewportRatio.prototype.getTargetElementsArea = function(targetElements) {
+		var elementList = document.querySelectorAll(targetElements);
 		for(var i = 0; i < elementList.length; i ++) {
 			this.targetElements.push({
 				name: elementList[i].nodeName,
@@ -29,8 +31,9 @@
 		return this.targetElementsArea;		
 	};
 
-	Viewport.prototype.calculateTargetAreaPercent = function() {
-		return ( this.targetElementsArea / this.viewportArea) * 100;
+	// Function to calculate target area percentage
+	ViewportRatio.prototype.calculateTargetAreaPercent = function() {
+		return ( this.targetElementsArea / this.getTotalViewportArea()) * 100;
 	};
 
 	// Get viewport dimensions
@@ -38,8 +41,8 @@
 		viewportHeight = window.innerHeight;
 
 	// Create viewport instance
-	var viewport = new Viewport(viewportWidth, viewportHeight);
+	window.viewportRatio = new ViewportRatio(viewportWidth, viewportHeight);
 
-	viewport.getTargetElementsArea('.div_ratio');
-	console.log(viewport.calculateTargetAreaPercent());
+	window.viewportRatio.getTargetElementsArea('.div_ratio');
+	console.log(window.viewportRatio.calculateTargetAreaPercent());
 })();
