@@ -1,6 +1,7 @@
 //trace - all elements
 //round - total percent
-//scroll - enable scroll
+//scroll - enable/disable scroll
+//callback when a certain % is hit
 //init - initialise
 ;(function() {
 	'use strict';
@@ -44,10 +45,8 @@
 	window.viewportRatio = new ViewportRatio(viewportWidth, viewportHeight);
 
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
-	console.log(window.viewportRatio.calculateTargetAreaPercent());
 
 	window.addEventListener('scroll', function(e) {
-	 	console.log(window.innerHeight);
-	 	console.log(window.innerWidth);
+	 	console.log(window.pageYOffset);
 	});
 })();
