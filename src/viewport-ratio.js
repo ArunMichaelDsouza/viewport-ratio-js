@@ -11,9 +11,7 @@
 		this.width = width;
 		this.height = height;
 		this.targetElements = [];
-		this.getTotalViewportArea = function() {
-			return this.width * this.height;
-		};
+		this.totalViewportArea = this.width * this.height;
 		this.targetElementsArea = 0;
 	}
 
@@ -33,7 +31,7 @@
 
 	// Function to calculate target area percentage
 	ViewportRatio.prototype.calculateTargetAreaPercent = function() {
-		return ( this.targetElementsArea / this.getTotalViewportArea()) * 100;
+		return (this.targetElementsArea / this.totalViewportArea) * 100;
 	};
 
 	// Get viewport dimensions
