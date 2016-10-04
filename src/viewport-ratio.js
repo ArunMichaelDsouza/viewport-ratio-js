@@ -28,7 +28,6 @@
 			});
 			this.targetElementsArea += this.targetElements[i].width * this.targetElements[i].height;
 		}
-		console.log(this.targetElementsArea);
 		return this.targetElementsArea;		
 	};
 
