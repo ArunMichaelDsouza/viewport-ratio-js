@@ -12,7 +12,7 @@
 		this.height = height;
 		this.targetElements = [];
 		this.getTotalViewportArea = function() {
-			return this.width + this.height;
+			return this.width * this.height;
 		};
 		this.targetElementsArea = 0;
 	}
@@ -26,9 +26,9 @@
 				width: elementList[i].clientWidth,
 				height: elementList[i].clientHeight 
 			});
-			this.targetElementsArea += this.targetElements[i].width;
-			this.targetElementsArea += this.targetElements[i].height;
+			this.targetElementsArea += this.targetElements[i].width * this.targetElements[i].height;
 		}
+		console.log(this.targetElementsArea);
 		return this.targetElementsArea;		
 	};
 
