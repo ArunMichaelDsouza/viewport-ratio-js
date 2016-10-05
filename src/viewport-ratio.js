@@ -20,7 +20,7 @@
 		var elementList = document.querySelectorAll(targetElements);
 		for(var i = 0; i < elementList.length; i ++) {
 			this.targetElements.push({
-				name: elementList[i].nodeName,
+				element: elementList[i],
 				width: elementList[i].clientWidth,
 				height: elementList[i].clientHeight 
 			});
@@ -34,6 +34,16 @@
 		return (this.targetElementsArea / this.totalViewportArea) * 100;
 	};
 
+	// Function to calculate viewport difference
+	ViewportRatio.prototype.calculateViewportDifference = function() {
+		console.log(this.targetElements[0].element.offsetTop);
+		console.log(window.pageYOffset);
+	};
+
+
+
+
+
 	// Get viewport dimensions
 	var viewportWidth = window.innerWidth,
 		viewportHeight = window.innerHeight;
@@ -44,6 +54,6 @@
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
 
 	window.addEventListener('scroll', function(e) {
-	 	console.log(window.pageYOffset);
+		window.viewportRatio.calculateViewportDifference();
 	});
 })();
