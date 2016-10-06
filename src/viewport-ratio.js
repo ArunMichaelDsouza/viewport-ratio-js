@@ -31,7 +31,10 @@
 
 	// Function to calculate target area percentage
 	ViewportRatio.prototype.calculateTargetAreaPercent = function() {
-		return parseFloat(((this.targetElementsArea / this.totalViewportArea) * 100).toFixed(2));
+		var areaVisible = parseFloat(((this.targetElementsArea / this.totalViewportArea) * 100).toFixed(2));
+		document.getElementById('visible-value').innerText = areaVisible+' %';
+		
+		return areaVisible;
 	};
 
 	// Function to calculate viewport difference
@@ -65,7 +68,7 @@
 
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
 
-	//console.log(window.viewportRatio.calculateTargetAreaPercent());
+	console.log(window.viewportRatio.calculateTargetAreaPercent());
 
 	window.addEventListener('scroll', function(e) {
 		window.viewportRatio.calculateViewportDifference();
