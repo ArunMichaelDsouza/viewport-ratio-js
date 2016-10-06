@@ -47,12 +47,8 @@
 			//console.log('Element visible height: '+elementVisibleHeight);
 
 			if(elementVisibleHeight >= 0) {
-				var t = this;
-				var e = this.targetElements[i];
-				setTimeout(function() {
-					t.targetElementsArea = e.width * elementVisibleHeight;
-					console.log('Area :'+t.calculateTargetAreaPercent());
-				}, 0);
+				this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+				console.log('Area :'+this.calculateTargetAreaPercent());
 			}
 		}
 	};
