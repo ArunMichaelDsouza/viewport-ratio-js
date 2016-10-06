@@ -31,16 +31,28 @@
 
 	// Function to calculate target area percentage
 	ViewportRatio.prototype.calculateTargetAreaPercent = function() {
-		return (this.targetElementsArea / this.totalViewportArea) * 100;
+		return parseFloat(((this.targetElementsArea / this.totalViewportArea) * 100).toFixed(2));
 	};
 
 	// Function to calculate viewport difference
 	ViewportRatio.prototype.calculateViewportDifference = function() {
-		console.log(this.targetElements[0].element.offsetTop);
-		console.log(window.pageYOffset);
+		for(var i = 0; i < this.targetElements.length; i ++) {
+			var elementOffsetTop = this.targetElements[i].element.offsetTop,
+				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset - elementOffsetTop);
+				
+			//console.log('Scroll depth: '+window.pageYOffset);
+			//console.log('Element visible height: '+elementVisibleHeight);
+
+			if(elementVisibleHeight >= 0) {
+				var t = this;
+				var e = this.targetElements[i];
+				setTimeout(function() {
+					t.targetElementsArea = e.width * elementVisibleHeight;
+					console.log('Area :'+t.calculateTargetAreaPercent());
+				}, 0);
+			}
+		}
 	};
-
-
 
 
 
@@ -52,6 +64,8 @@
 	window.viewportRatio = new ViewportRatio(viewportWidth, viewportHeight);
 
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
+
+	//console.log(window.viewportRatio.calculateTargetAreaPercent());
 
 	window.addEventListener('scroll', function(e) {
 		window.viewportRatio.calculateViewportDifference();
