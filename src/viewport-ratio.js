@@ -47,7 +47,12 @@
 			//console.log('Element visible height: '+elementVisibleHeight);
 
 			if(elementVisibleHeight >= 0) {
+				//console.log(this.targetElements[i].width * elementVisibleHeight);
 				this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+				console.log('Area :'+this.calculateTargetAreaPercent());
+			}
+			else {
+				this.targetElementsArea = this.targetElements[i].width * 0;	
 				console.log('Area :'+this.calculateTargetAreaPercent());
 			}
 		}
