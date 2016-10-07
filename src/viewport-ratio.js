@@ -40,21 +40,34 @@
 	// Function to calculate viewport difference
 	ViewportRatio.prototype.calculateViewportDifference = function() {
 		for(var i = 0; i < this.targetElements.length; i ++) {
-			var elementOffsetTop = this.targetElements[i].element.offsetTop,
-				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset - elementOffsetTop);
-				
-			//console.log('Scroll depth: '+window.pageYOffset);
-			//console.log('Element visible height: '+elementVisibleHeight);
+			var elementOffsetTop = this.targetElements[i].element.offsetTop, elementVisibleHeight;
 
-			if(elementVisibleHeight >= 0) {
+			if(window.pageYOffset >= elementOffsetTop) {
+				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset - elementOffsetTop);
+				if(elementVisibleHeight >= 0) {
 				//console.log(this.targetElements[i].width * elementVisibleHeight);
-				this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-				console.log('Area :'+this.calculateTargetAreaPercent());
+					this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+					console.log('Area :'+this.calculateTargetAreaPercent());
+				}
+				else {
+					this.targetElementsArea = this.targetElements[i].width * 0;	
+					console.log('Area :'+this.calculateTargetAreaPercent());
+				}
 			}
 			else {
-				this.targetElementsArea = this.targetElements[i].width * 0;	
-				console.log('Area :'+this.calculateTargetAreaPercent());
+				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset);
+				if(elementVisibleHeight >= 0) {
+				//console.log(this.targetElements[i].width * elementVisibleHeight);
+					this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+					console.log('Area :'+this.calculateTargetAreaPercent());
+				}
+				else {
+					this.targetElementsArea = this.targetElements[i].width * 0;	
+					console.log('Area :'+this.calculateTargetAreaPercent());
+				}
 			}
+
+			
 		}
 	};
 
