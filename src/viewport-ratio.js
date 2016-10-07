@@ -55,7 +55,7 @@
 				}
 			}
 			else {
-				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset);
+				elementVisibleHeight = this.targetElements[i].height;
 				if(elementVisibleHeight >= 0) {
 				//console.log(this.targetElements[i].width * elementVisibleHeight);
 					this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
