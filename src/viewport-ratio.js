@@ -58,48 +58,27 @@ ALGO
 	// Function to calculate viewport difference
 	ViewportRatio.prototype.calculateViewportDifference = function() {
 		for(var i = 0; i < this.targetElements.length; i ++) {
-			var elementOffsetTop = this.targetElements[i].element.offsetTop, elementVisibleHeight;
+			var elementOffsetTop = this.targetElements[i].element.offsetTop,
+				elementVisibleHeight,
+				elementHeight = this.targetElements[i].height;
 
-			if(window.pageYOffset >= elementOffsetTop) {
-				elementVisibleHeight = this.targetElements[i].height - (window.pageYOffset - elementOffsetTop);
-				if(elementVisibleHeight >= 0) {
-				//console.log(this.targetElements[i].width * elementVisibleHeight);
-					this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-					console.log('Area :'+this.calculateTargetAreaPercent());
-				}
-				else {
-					this.targetElementsArea = this.targetElements[i].width * 0;	
-					console.log('Area :'+this.calculateTargetAreaPercent());
-				}
+			var gap = (window.innerHeight + window.pageYOffset) - (elementOffsetTop + elementHeight);
+
+			if((gap + elementHeight) > window.innerHeight) {
+				var t = ((gap + elementHeight) - window.innerHeight);
+				elementVisibleHeight = Math.max(0, elementHeight - t);
 			}
 			else {
-				if(((this.targetElements[i].height + elementOffsetTop) > window.innerHeight) && window.pageYOffset === 0) {
-					elementVisibleHeight = window.innerHeight - elementOffsetTop;
-					if(elementVisibleHeight >= 0) {
-					//console.log(this.targetElements[i].width * elementVisibleHeight);
-						this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-						console.log('Area :'+this.calculateTargetAreaPercent());
-					}
-					else {
-						this.targetElementsArea = this.targetElements[i].width * 0;	
-						console.log('Area :'+this.calculateTargetAreaPercent());
-					}
+				if(gap > 0) {
+					elementVisibleHeight = elementHeight;
 				}
 				else {
-					elementVisibleHeight = this.targetElements[i].height;
-					if(elementVisibleHeight >= 0) {
-					//console.log(this.targetElements[i].width * elementVisibleHeight);
-						this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-						console.log('Area :'+this.calculateTargetAreaPercent());
-					}
-					else {
-						this.targetElementsArea = this.targetElements[i].width * 0;	
-						console.log('Area :'+this.calculateTargetAreaPercent());
-					}
+					elementVisibleHeight = Math.max(0, elementHeight - Math.abs(gap));
 				}
 			}
 
-			
+			this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+			console.log('Area :'+this.calculateTargetAreaPercent());
 		}
 	};
 
