@@ -1,21 +1,3 @@
-/*
-
-ALGO
-
-1) gap = innerHeight + scrollY - (offsetTop + elHeight)
-2) if (gap + elHeight) > innerHeight
-		- element not fully in viewport
-		- visibleHeight = ((gap + elheight) - innerHeight) - elHeight
-	else
-		if (gap > 0) 
-			- element fully in viewport
-			- visibleHeight = elHeight
-		else
-			- element not fully in viewport
-			- visibleHeight = elHeight - gap
-
-			*/
-
 //trace - all elements
 //round - total percent
 //scroll - enable/disable scroll
@@ -30,11 +12,10 @@ ALGO
 		this.height = height;
 		this.targetElements = [];
 		this.totalViewportArea = this.width * this.height;
-		this.targetElementsArea = 0;
 	}
 
 	// Function to get target element's area (in px)
-	ViewportRatio.prototype.getTargetElementsArea = function(targetElements) {
+	ViewportRatio.prototype.getTargetElementsAreaFn = function(targetElements) {
 		var elementList = document.querySelectorAll(targetElements);
 		for(var i = 0; i < elementList.length; i ++) {
 			this.targetElements.push({
@@ -42,7 +23,7 @@ ALGO
 				width: elementList[i].clientWidth,
 				height: elementList[i].clientHeight 
 			});
-			this.targetElementsArea += this.targetElements[i].width * this.targetElements[i].height;
+			//this.targetElementsArea += this.targetElements[i].width * this.targetElements[i].height;
 		}
 		return this.targetElementsArea;		
 	};
@@ -57,6 +38,7 @@ ALGO
 
 	// Function to calculate viewport difference
 	ViewportRatio.prototype.calculateViewportDifference = function() {
+		this.targetElementsArea = 0;
 		for(var i = 0; i < this.targetElements.length; i ++) {
 			var elementOffsetTop = this.targetElements[i].element.offsetTop,
 				elementVisibleHeight,
@@ -77,8 +59,9 @@ ALGO
 				}
 			}
 
-			this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-			console.log('Area :'+this.calculateTargetAreaPercent());
+			this.targetElementsArea += this.targetElements[i].width * elementVisibleHeight;
+			console.log(this.targetElementsArea);
+			console.log('Area : '+this.calculateTargetAreaPercent()+'%');
 		}
 	};
 
@@ -91,7 +74,7 @@ ALGO
 	// Create viewport instance
 	window.viewportRatio = new ViewportRatio(viewportWidth, viewportHeight);
 
-	window.viewportRatio.getTargetElementsArea('.div_ratio');
+	window.viewportRatio.getTargetElementsAreaFn('.div_ratio');
 
 	console.log(window.viewportRatio.calculateViewportDifference());
 
