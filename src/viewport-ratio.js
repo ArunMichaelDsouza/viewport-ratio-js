@@ -60,9 +60,8 @@
 			}
 
 			this.targetElementsArea += this.targetElements[i].width * elementVisibleHeight;
-			console.log(this.targetElementsArea);
-			console.log('Area : '+this.calculateTargetAreaPercent()+'%');
 		}
+		console.log('Area : '+this.calculateTargetAreaPercent()+'%');
 	};
 
 
