@@ -46,18 +46,27 @@
 
 			var gap = (window.innerHeight + window.pageYOffset) - (elementOffsetTop + elementHeight);
 
-			if((gap + elementHeight) > window.innerHeight) {
-				var t = ((gap + elementHeight) - window.innerHeight);
-				elementVisibleHeight = Math.max(0, elementHeight - t);
+			var pos = window.getComputedStyle(this.targetElements[i].element).position;
+
+			if(pos === 'fixed') {
+				elementVisibleHeight = elementHeight;
 			}
 			else {
-				if(gap > 0) {
-					elementVisibleHeight = elementHeight;
+				if((gap + elementHeight) > window.innerHeight) {
+					var t = ((gap + elementHeight) - window.innerHeight);
+					elementVisibleHeight = Math.max(0, elementHeight - t);
 				}
 				else {
-					elementVisibleHeight = Math.max(0, elementHeight - Math.abs(gap));
+					if(gap > 0) {
+						elementVisibleHeight = elementHeight;
+					}
+					else {
+						elementVisibleHeight = Math.max(0, elementHeight - Math.abs(gap));
+					}
 				}
 			}
+
+			
 
 			this.targetElementsArea += this.targetElements[i].width * elementVisibleHeight;
 		}
