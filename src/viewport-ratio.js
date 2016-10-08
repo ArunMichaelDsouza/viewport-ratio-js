@@ -1,3 +1,21 @@
+/*
+
+ALGO
+
+1) gap = innerHeight + scrollY - (offsetTop + elHeight)
+2) if (gap + elHeight) > innerHeight
+		- element not fully in viewport
+		- visibleHeight = ((gap + elheight) - innerHeight) - elHeight
+	else
+		if (gap > 0) 
+			- element fully in viewport
+			- visibleHeight = elHeight
+		else
+			- element not fully in viewport
+			- visibleHeight = elHeight - gap
+
+			*/
+
 //trace - all elements
 //round - total percent
 //scroll - enable/disable scroll
@@ -55,15 +73,29 @@
 				}
 			}
 			else {
-				elementVisibleHeight = this.targetElements[i].height;
-				if(elementVisibleHeight >= 0) {
-				//console.log(this.targetElements[i].width * elementVisibleHeight);
-					this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
-					console.log('Area :'+this.calculateTargetAreaPercent());
+				if(((this.targetElements[i].height + elementOffsetTop) > window.innerHeight) && window.pageYOffset === 0) {
+					elementVisibleHeight = window.innerHeight - elementOffsetTop;
+					if(elementVisibleHeight >= 0) {
+					//console.log(this.targetElements[i].width * elementVisibleHeight);
+						this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+						console.log('Area :'+this.calculateTargetAreaPercent());
+					}
+					else {
+						this.targetElementsArea = this.targetElements[i].width * 0;	
+						console.log('Area :'+this.calculateTargetAreaPercent());
+					}
 				}
 				else {
-					this.targetElementsArea = this.targetElements[i].width * 0;	
-					console.log('Area :'+this.calculateTargetAreaPercent());
+					elementVisibleHeight = this.targetElements[i].height;
+					if(elementVisibleHeight >= 0) {
+					//console.log(this.targetElements[i].width * elementVisibleHeight);
+						this.targetElementsArea = this.targetElements[i].width * elementVisibleHeight;
+						console.log('Area :'+this.calculateTargetAreaPercent());
+					}
+					else {
+						this.targetElementsArea = this.targetElements[i].width * 0;	
+						console.log('Area :'+this.calculateTargetAreaPercent());
+					}
 				}
 			}
 
@@ -82,7 +114,7 @@
 
 	window.viewportRatio.getTargetElementsArea('.div_ratio');
 
-	console.log(window.viewportRatio.calculateTargetAreaPercent());
+	console.log(window.viewportRatio.calculateViewportDifference());
 
 	window.addEventListener('scroll', function(e) {
 		window.viewportRatio.calculateViewportDifference();
