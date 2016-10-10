@@ -10,14 +10,14 @@
 	// Viewport Ratio object
 	var viewportRatio = {
 
-		// Viewport specific parameters
+		// Viewport info
 		viewport: {
 			width: w.innerWidth,
 			height: w.innerHeight,	
 			totalArea: w.innerWidth * w.innerHeight
 		},
 
-		// Target elements' specific parameters
+		// Target elements' info
 		targetElements: {
 			list: [],
 			totalArea: 0
@@ -26,6 +26,8 @@
 		// Function to fetch all target elements
 		getAllTargetElements: function(targetElements) {
 			var elementList = w.document.querySelectorAll(targetElements);
+
+			// Once fetched, add to target elements' info object
 			for(var i = 0; i < elementList.length; i ++) {
 				this.targetElements.list.push({
 					element: elementList[i],
@@ -37,15 +39,16 @@
 
 		// Function to calculate target area percentage
 		calculateTargetAreaPercent: function() {
-			var areaVisible = parseFloat(((this.targetElements.totalArea / this.viewport.totalArea) * 100).toFixed(2));
-			w.document.getElementById('visible-value').innerText = areaVisible+' %';
-			return areaVisible;
+			var visiblePercentage = parseFloat(((this.targetElements.totalArea / this.viewport.totalArea) * 100).toFixed(2));
+			w.document.getElementById('visible-value').innerText = visiblePercentage+' %';
+			return visiblePercentage;
 		},
 
 		// Function to calculate viewport area difference
 		calculateViewportAreaDifference: function() {
 			this.targetElements.totalArea = 0;
 
+			// Apply scroll difference calculation logic on all target elements
 			for(var i = 0; i < this.targetElements.list.length; i ++) {
 				var elementOffsetTop = this.targetElements.list[i].element.offsetTop,
 					elementVisibleHeight,
@@ -76,7 +79,7 @@
 			console.log('Area : '+this.calculateTargetAreaPercent()+'%');
 		},
 
-		// Viewport on scroll action
+		// Viewport on-scroll action
 		onScroll: function() {
 			this.calculateViewportAreaDifference();
 		},
