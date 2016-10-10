@@ -47,6 +47,7 @@
 			var gap = (window.innerHeight + window.pageYOffset) - (elementOffsetTop + elementHeight);
 
 			var pos = window.getComputedStyle(this.targetElements[i].element).position;
+			console.log(pos);
 
 			if(pos === 'fixed') {
 				elementVisibleHeight = elementHeight;

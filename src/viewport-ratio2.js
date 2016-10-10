@@ -46,27 +46,32 @@
 		calculateViewportAreaDifference: function() {
 			this.targetElements.totalArea = 0;
 
-			var elementList = this.targetElements.list;
-			for(var i = 0; i < elementList.length; i ++) {
-				var elementOffsetTop = elementList[i].element.offsetTop,
+			for(var i = 0; i < this.targetElements.list.length; i ++) {
+				var elementOffsetTop = this.targetElements.list[i].element.offsetTop,
 					elementVisibleHeight,
-					elementHeight = elementList[i].height;
+					elementHeight = this.targetElements.list[i].height;
 
-				var gap = (w.innerHeight + w.pageYOffset) - (elementOffsetTop + elementHeight);
+				var scrollGap = (w.innerHeight + w.pageYOffset) - (elementOffsetTop + elementHeight),
+					pos = w.getComputedStyle(this.targetElements.list[i].element).position;
 
-				if((gap + elementHeight) > w.innerHeight) {
-					var t = ((gap + elementHeight) - w.innerHeight);
-					elementVisibleHeight = Math.max(0, elementHeight - t);
+				if(pos === 'fixed') {
+					elementVisibleHeight = elementHeight;
 				}
 				else {
-					if(gap > 0) {
-						elementVisibleHeight = elementHeight;
+					if((scrollGap + elementHeight) > w.innerHeight) {
+						var scrollDifference = ((scrollGap + elementHeight) - w.innerHeight);
+						elementVisibleHeight = Math.max(0, elementHeight - scrollDifference);
 					}
 					else {
-						elementVisibleHeight = Math.max(0, elementHeight - Math.abs(gap));
+						if(scrollGap > 0) {
+							elementVisibleHeight = elementHeight;
+						}
+						else {
+							elementVisibleHeight = Math.max(0, elementHeight - Math.abs(scrollGap));
+						}
 					}
 				}
-				this.targetElements.totalArea += elementList[i].width * elementVisibleHeight;
+				this.targetElements.totalArea += this.targetElements.list[i].width * elementVisibleHeight;
 			}
 			console.log('Area : '+this.calculateTargetAreaPercent()+'%');
 		},
