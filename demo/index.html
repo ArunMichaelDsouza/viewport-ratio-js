@@ -49,9 +49,14 @@
 		<h4 id="visible-value"></h4>
 		<span>Visible</span>
 	</div>
-	<script src="../build/viewport-ratio.min.js"></script>
+	<script src="../src/viewport-ratio.js"></script>
 	<script>
-		viewportRatio.init('.div_ratio', {});
+		var vr = viewportRatio;
+		vr.init('.div_ratio', {});
+		window.addEventListener('scroll', function() {
+			var x = vr.onScroll();
+			console.log(x);
+		}, false);
 	</script>
 </body>
 </html>

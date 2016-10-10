@@ -39,13 +39,11 @@
 
 		// Function to calculate target area percentage
 		calculateTargetAreaPercent: function() {
-			var visiblePercentage = parseFloat(((this.targetElements.totalArea / this.viewport.totalArea) * 100).toFixed(2));
-			w.document.getElementById('visible-value').innerText = visiblePercentage+' %';
-			return visiblePercentage;
+			return parseFloat(((this.targetElements.totalArea / this.viewport.totalArea) * 100).toFixed(2));
 		},
 
 		// Function to calculate viewport area difference
-		calculateViewportAreaDifference: function() {
+		calculateViewportAreaDifference: function(fn) {
 			this.targetElements.totalArea = 0;
 
 			// Apply scroll difference calculation logic on all target elements
@@ -76,12 +74,13 @@
 				}
 				this.targetElements.totalArea += this.targetElements.list[i].width * elementVisibleHeight;
 			}
-			console.log('Area : '+this.calculateTargetAreaPercent()+'%');
+			return this.calculateTargetAreaPercent();
 		},
 
 		// Viewport on-scroll action
 		onScroll: function() {
-			this.calculateViewportAreaDifference();
+			var x = viewportRatio.calculateViewportAreaDifference();
+			return x;
 		},
 
 		// Script initialisation
@@ -93,5 +92,5 @@
 	w.viewportRatio = viewportRatio;	
 
 	// Viewport scroll event trigger
-	w.addEventListener('scroll', w.viewportRatio.onScroll.bind(viewportRatio), false);
+	
 })(window);
