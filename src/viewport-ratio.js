@@ -77,20 +77,11 @@
 			return this.calculateTargetAreaPercent();
 		},
 
-		// Viewport on-scroll action
-		onScroll: function() {
-			var x = viewportRatio.calculateViewportAreaDifference();
-			return x;
-		},
-
 		// Script initialisation
 		init: function(targetElements, options) {
 			this.getAllTargetElements(targetElements);
 			this.calculateViewportAreaDifference();
 		}
 	};
-	w.viewportRatio = viewportRatio;	
-
-	// Viewport scroll event trigger
-	
+	w.viewportRatio = viewportRatio;		
 })(window);

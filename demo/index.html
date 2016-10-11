@@ -52,10 +52,17 @@
 	<script src="../src/viewport-ratio.js"></script>
 	<script>
 		var vr = viewportRatio;
-		vr.init('.div_ratio', {});
+
+		// Initialise viewport ratio
+		vr.init('.div_ratio');
+
+		// Show area difference
+		document.getElementById('visible-value').innerText = vr.calculateViewportAreaDifference()+' %';
+
+		// Show area difference on scroll event
 		window.addEventListener('scroll', function() {
-			var x = vr.onScroll();
-			console.log(x);
+			var areaDifference = vr.calculateViewportAreaDifference();
+			document.getElementById('visible-value').innerText = areaDifference+' %';
 		}, false);
 	</script>
 </body>
