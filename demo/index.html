@@ -1,69 +1,125 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Viewport Ratio JS Demo</title>
-	<meta charset="UTF-8">
-	<style>
-		body {
-			/*padding: 20px 0 1000px;*/
-			margin: 0;
-			padding-bottom: 1000px;
-			background-color: #ddd;
-		}
-		.area-pane {
-			width: 140px;
-		    position: fixed;
-		    bottom: 0;
-		    background: #ccc;
-		    height: 80px;
-		    right: 0;
-		    font-family: sans-serif;
-    		text-align: center;
-		}
-		.area-pane > h4 {
-			margin: 20px 0 10px;
-		}
-		.div_ratio {
-			width: 150px;
-			height: 40px;
-			background-color: #50a4e2;
-			position: relative;
-			padding: 20px;
-			margin-top: 300px;
-			margin-left: 120px;
-		}
-		.dv {
-			margin-top: 200px;
-			position: fixed;
-			top: 0;
-		}
-		span {
-			display: block;
-		}
-	</style>
+    <title>Viewport Ratio JS Demo</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="http://getbootstrap.com/dist/css/bootstrap.min.css">
+    <style>
+	    .area-pane {
+	        width: 140px;
+	        position: fixed;
+	        bottom: 0;
+	        background: #ccc;
+	        height: 80px;
+	        right: 0;
+	        font-family: sans-serif;
+	        text-align: center;
+	        z-index: 1000;
+	    }
+	    .area-pane > h4 {
+	    	font-weight: 700;
+	        margin: 20px 0 10px;
+	    }
+	    .target-element {
+	    	background-color: yellow;
+	    }
+    </style>
 </head>
+
 <body>
-	<div class="div_ratio dv" id="test"></div>
-	<div class="div_ratio" id="test"></div>
-	<div class="area-pane">
-		<h4 id="visible-value"></h4>
-		<span>Visible</span>
-	</div>
-	<script src="../src/viewport-ratio.js"></script>
-	<script>
-		var vr = viewportRatio;
+    <div class="container" style="width: 800px; margin: 30px auto;">
+        <div class="header clearfix">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation"><a href="#">About</a></li>
+                    <li role="presentation"><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Project name</h3>
+        </div>
+        <div class="jumbotron target-element">
+            <h1>Jumbotron heading</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
+        </div>
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+            <div class="col-lg-6">
+                <h4>Subheading</h4>
+                <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+                <h4>Subheading</h4>
+                <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+                <h4>Subheading</h4>
+                <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            </div>
+        </div>
+    </div>
 
-		// Initialise viewport ratio
-		vr.init('.div_ratio');
+    <div class="area-pane">
+        <h4 id="visible-value"></h4>
+        <span>Visible</span>
+    </div>
+    <script src="../src/viewport-ratio.js"></script>
+    <script>
+    var vr = viewportRatio;
 
-		// Show area difference
-		document.getElementById('visible-value').innerText = vr.calculateViewportAreaDifference()+' %';
+    // Initialise viewport ratio
+    vr.init('.target-element');
 
-		// Show area difference on scroll event
-		window.addEventListener('scroll', function() {
-			var areaDifference = vr.calculateViewportAreaDifference();
-			document.getElementById('visible-value').innerText = areaDifference+' %';
-		}, false);
-	</script>
+    // Show area difference
+    document.getElementById('visible-value').innerText = vr.calculateViewportAreaDifference() + ' %';
+
+    // Show area difference on scroll event
+    window.addEventListener('scroll', function() {
+        var areaDifference = vr.calculateViewportAreaDifference();
+        document.getElementById('visible-value').innerText = areaDifference + ' %';
+    }, false);
+    </script>
 </body>
+
 </html>
